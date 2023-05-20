@@ -51,7 +51,8 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("This is the secret key we will use to generate token for the project")),
         ValidateAudience = false,
-        ValidateIssuer = false
+        ValidateIssuer = false,
+        ClockSkew=TimeSpan.Zero   // to change default time 5 minute
     };
 
 });

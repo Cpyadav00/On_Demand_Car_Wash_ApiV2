@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using On_Demand_Car_Wash_ApiV2.Context;
 using On_Demand_Car_Wash_ApiV2.DTOs;
@@ -75,6 +76,7 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
 
 
         [HttpGet]
+        [Authorize]
         [Route("GetUserDetails")]
         public async Task<List<UserDetail>> GetUserDetails()
         {

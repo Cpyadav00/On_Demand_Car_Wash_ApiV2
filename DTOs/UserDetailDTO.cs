@@ -10,5 +10,7 @@ namespace On_Demand_Car_Wash_ApiV2.DTOs
         //[Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string Role { get; set; }
     }
 }

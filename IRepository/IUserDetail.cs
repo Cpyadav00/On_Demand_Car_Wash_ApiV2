@@ -6,7 +6,8 @@ namespace On_Demand_Car_Wash_ApiV2.IRepository
 {
     public interface IUserDetail
     {
-        Task<int> Login(UserDetailDTO user);
-        Task<int> Register(UserDetail user);
+        Task<CustomReturnType> Login(UserDetail user);
+        Task<CustomReturnType> Register(UserDetail user);
+        Task<List<UserDetail>> GetUserDetails();
     }
 }

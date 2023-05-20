@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using On_Demand_Car_Wash_ApiV2.Context;
 using On_Demand_Car_Wash_ApiV2.DTOs;
+using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.Models;
 using On_Demand_Car_Wash_ApiV2.Services;
 
@@ -12,27 +13,30 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
     public class UserDetailController : ControllerBase
     {
         private readonly UserDetailService service; 
+        private readonly TokenGeneration token;
         public UserDetailController(UserDetailService ser)
         {
             service = ser;     
         }
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserDetailDTO user)
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] UserDetail user)
         {
            var result= await service.Login(user);
-            if(result==200)
+            if(result.ReturnCode==200)
             {
-                return Ok(new { Message = "Login Successful" });
+                //user.Token = ;
+                return Ok(new {Token = result.Token, Message = "Login Successful" });
             }
-            else if(result==400)
+            else if(result.ReturnCode == 400)
             {
                 return BadRequest(new {Message="User Not found"});
             }
-            else if (result == 401)
+            else if (result.ReturnCode == 401)
             {
                 return BadRequest(new { Message = "Password is not correct" });
             }
-            else if (result == 404)
+            else if (result.ReturnCode == 404)
             {
                 return BadRequest(new { Message = "Object is Null" });
             }
@@ -45,19 +49,20 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         {
 
             var result = await service.Register(user);
-            if (result == 200)
+            if (result.ReturnCode == 200)
             {
+               // user.Token = token.CreateJwt(user);
                 return Ok(new {Message= "User Registered" });
             }
-            else if(result==800)
+            else if(result.ReturnCode ==800)
             {
                 return BadRequest(new { Message = "Password is Not Valid" });
             }
-            else if(result==409)
+            else if(result.ReturnCode ==409)
             {
                 return BadRequest(new { Message = "Email already Exist!" });
             }
-            else if(result==404)
+            else if(result.ReturnCode ==404)
             {
                 return BadRequest(new { Message = "User is Null!" });
             }
@@ -66,6 +71,17 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
                 return BadRequest();
             }
         }
+
+
+
+        [HttpGet]
+        [Route("GetUserDetails")]
+        public async Task<List<UserDetail>> GetUserDetails()
+        {
+            var result = await service.GetUserDetails();
+            return result;
+        }
+
 
     }
 }

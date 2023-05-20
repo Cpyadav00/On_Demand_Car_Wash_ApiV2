@@ -6,6 +6,8 @@ using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
+using System.ComponentModel;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -14,71 +16,90 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
     public class UserDetailRepository : IUserDetail
     {
         private readonly CarDbContext context;
+         TokenGeneration token=new TokenGeneration();
         public UserDetailRepository(CarDbContext _context)
         {
-            context = _context;    
+            context = _context; 
+           // token= _token;
         }
-        public async Task<int> Login(UserDetailDTO user)
+        public async Task<CustomReturnType> Login(UserDetail user)
         {
             try
             {
+                CustomReturnType ans = new CustomReturnType();
                 if (user == null)
                 {
-                    return 404;
+                    ans.ReturnCode = 404;
+
+                    return ans;
+                   
                 }
 
                 var check=await context.UserDetails.FirstOrDefaultAsync(
                     x=>x.Email == user.Email);
                 if (check != null) {
-                    if(PasswordHasher.VerifyPassword(check.Password,user.Password))
-                      return 200;
-
-                    return 401;
+                    if (PasswordHasher.VerifyPassword(user.Password, check.Password))
+                    {
+                        check.Token = token.CreateJwt(check);
+                        ans.ReturnCode = 200;
+                        ans.Token = check.Token;
+                        context.SaveChanges();  
+                        return ans;
+                    }
+                    ans.ReturnCode = 400;
+                    return ans;
                 }
                 else
                 {
-                    return 400;
+                    ans.ReturnCode = 400;
+                    return ans;
                 }
             }
             catch (Exception ex)
             {
-                return 500;
+
+                throw;
             }
             finally {  }
         }
 
-        public async Task<int> Register(UserDetail user)
+        public async Task<CustomReturnType> Register(UserDetail user)
         {
             try
             {
+                CustomReturnType ans = new CustomReturnType();
                 if (user != null)
                 {
                     //check email
                     if(await CheckEmailExistAsync(user.Email))
                     {
-                        return 409;
+                        ans.ReturnCode = 409;
+                        return ans;
                     }
                     //check password strength
                     var pass = CheckPasswordStrength(user.Password);
                     if(!string.IsNullOrEmpty(pass))
                     {
-                        return 800;
+                        ans.ReturnCode = 800;
+                        return ans;
                     }
                     user.Password=PasswordHasher.HashPassword(user.Password);
                     user.Role = "Customer";
                     await context.UserDetails.AddAsync(user);
                     await context.SaveChangesAsync();
-                    return 200;
+                    ans.ReturnCode = 200;
+                    return ans;
                 }
 
                 else
                 {
-                    return 404;
+                    ans.ReturnCode = 404;
+                    return ans;
                 }
             }
             catch (Exception ex)
             {
-                return 500;
+                throw;
             }
             finally {  }
         }
@@ -98,11 +119,16 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                     && Regex.IsMatch(password, "[0-9]") )
                 sb.Append("Password should be AlphaNumeric" + Environment.NewLine);
                
-            if (!Regex.IsMatch(password, "[!,@,#,$,%,^,&,*,(,),{,},[,],|,\\,<,>,?,/]"))
+            if (!Regex.IsMatch(password, "[!,@,#,$,%,^,&,*,(,),{,},|,\\,<,>,?,/]"))
                     sb.Append("Password should contain special chars" + Environment.NewLine);
                 return sb.ToString();
         }
 
+
+        public async Task<List<UserDetail>> GetUserDetails()
+        {
+            return await context.UserDetails.ToListAsync();
+        }
 
     }
 }

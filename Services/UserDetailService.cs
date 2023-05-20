@@ -13,14 +13,20 @@ namespace On_Demand_Car_Wash_ApiV2.Services
             inter = repository; 
         }
 
-        public async Task<int> Login(UserDetailDTO user)
+        public async Task<CustomReturnType> Login(UserDetail user)
         {
             return await inter.Login(user);
         }
 
-        public async Task<int> Register(UserDetail user)
+        public async Task<CustomReturnType> Register(UserDetail user)
         {
             return await inter.Register(user);
         }
+
+        public async Task<List<UserDetail>>  GetUserDetails()
+        {
+            return await inter.GetUserDetails();
+        }
+
     }
 }

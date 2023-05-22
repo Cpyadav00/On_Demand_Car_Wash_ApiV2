@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using On_Demand_Car_Wash_ApiV2.Context;
-using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.Models;
 using On_Demand_Car_Wash_ApiV2.Services;
@@ -19,6 +18,9 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         {
             service = ser;     
         }
+
+        #region Login User
+
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] UserDetail user)
@@ -44,6 +46,12 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             else
             return BadRequest();
         }
+
+
+        #endregion Login User
+
+
+        #region For Register User
 
         [HttpPost("Registration")]
         public async Task<IActionResult> Registration([FromBody] UserDetail user)
@@ -74,15 +82,21 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         }
 
 
+        #endregion For Register User
+
+
+        #region For Getting All Users
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         [Route("GetUserDetails")]
         public async Task<List<UserDetail>> GetUserDetails()
         {
             var result = await service.GetUserDetails();
             return result;
         }
+
+        #endregion For Getting All Users
 
 
     }

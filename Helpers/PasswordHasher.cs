@@ -9,6 +9,8 @@ namespace On_Demand_Car_Wash_ApiV2.Helpers
         private static readonly int HashSize = 20;
         private static readonly int Iterations = 10000;
 
+        #region Creating Hash Of Password
+
         public static string HashPassword(string password)
         {
             byte[] salt;
@@ -25,6 +27,11 @@ namespace On_Demand_Car_Wash_ApiV2.Helpers
             return base64Hash;
         }
 
+
+        #endregion Creating Hash Of Password
+
+
+        #region Verifying Password Is Valid 
         public static bool VerifyPassword(string password,string bas64Hash)
         {
             var hasBytess=Convert.FromBase64String(bas64Hash);
@@ -42,6 +49,8 @@ namespace On_Demand_Car_Wash_ApiV2.Helpers
 
             return true;
         }
+
+        #endregion Verifying Password Is Valid 
 
 
 

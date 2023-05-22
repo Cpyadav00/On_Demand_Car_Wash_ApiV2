@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using On_Demand_Car_Wash_ApiV2.Context;
-using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
@@ -16,12 +16,13 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
     public class UserDetailRepository : IUserDetail
     {
         private readonly CarDbContext context;
-         TokenGeneration token=new TokenGeneration();
+        private  TokenGeneration token=new TokenGeneration();
         public UserDetailRepository(CarDbContext _context)
         {
             context = _context; 
-           // token= _token;
         }
+
+        #region Login User
         public async Task<CustomReturnType> Login(UserDetail user)
         {
             try
@@ -60,9 +61,11 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
                 throw;
             }
-            finally {  }
         }
 
+        #endregion Login User
+
+        #region For Register User
         public async Task<CustomReturnType> Register(UserDetail user)
         {
             try
@@ -84,7 +87,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                         return ans;
                     }
                     user.Password=PasswordHasher.HashPassword(user.Password);
-                    user.Role = "Customer";
+                    user.Role = "Admin";
                     await context.UserDetails.AddAsync(user);
                     await context.SaveChangesAsync();
                     ans.ReturnCode = 200;
@@ -101,14 +104,23 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             {
                 throw;
             }
-            finally {  }
         }
 
-   private async Task<bool> CheckEmailExistAsync(string email)
+        #endregion For Register User 
+
+
+        #region For Checking Email Is Present Or Not
+
+        private async Task<bool> CheckEmailExistAsync(string email)
     => await context.UserDetails.AnyAsync(x=>x.Email == email);
- 
-        
-     private  string CheckPasswordStrength(string password)
+
+
+        #endregion For Checking Email Is Present Or Not
+
+
+        #region For Checking PasswordStrength
+
+        private string CheckPasswordStrength(string password)
         {
             StringBuilder sb = new StringBuilder();
             if(password.Length<8)
@@ -124,11 +136,17 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                 return sb.ToString();
         }
 
+        #endregion For Checking PasswordStrength
 
+
+        #region For Getting All Users
         public async Task<List<UserDetail>> GetUserDetails()
         {
             return await context.UserDetails.ToListAsync();
         }
+
+
+        #endregion For Getting All Users
 
     }
 }

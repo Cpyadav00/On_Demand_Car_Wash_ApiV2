@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//adding cors to the program
+//adding cors 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy", builder =>
@@ -36,6 +36,12 @@ builder.Services.AddDbContext<CarDbContext>(option => {
 
 builder.Services.AddScoped<IUserDetail, UserDetailRepository>();
 builder.Services.AddScoped<UserDetailService, UserDetailService>();
+
+//builder.Services.AddScoped<ICar, CarRepository>();
+//builder.Services.AddScoped<CarService, CarService>();
+
+builder.Services.AddScoped<IPackage, PackageRepository>();
+builder.Services.AddScoped<PackageService, PackageService>();
 
 
 builder.Services.AddAuthentication(x =>

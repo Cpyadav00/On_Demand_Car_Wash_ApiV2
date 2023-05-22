@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,6 +8,8 @@ namespace On_Demand_Car_Wash_ApiV2.Helpers
 {
     public class TokenGeneration
     {
+      
+
         public string CreateJwt(UserDetail user)
         {
             try

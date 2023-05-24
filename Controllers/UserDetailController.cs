@@ -60,7 +60,6 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             var result = await service.Register(user);
             if (result.ReturnCode == 200)
             {
-               // user.Token = token.CreateJwt(user);
                 return Ok(new {Message= "User Registered" });
             }
             else if(result.ReturnCode ==800)
@@ -85,10 +84,26 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         #endregion For Register User
 
 
+        #region For Deleting User
+
+        [HttpDelete]
+       // [Authorize(Roles = "Admin")]
+        [Route("DeleteUserDetails/{id}")]
+        public async Task<bool> DeleteUserDetails([FromRoute]int id)
+        {
+            if (id == 0)
+                return false;
+            if(await service.DeleteUserDetails(id))
+                return true;
+            return false;
+        }
+
+        #endregion For Deleting User
+
         #region For Getting All Users
 
         [HttpGet]
-        [Authorize(Roles ="Admin")]
+       // [Authorize(Roles ="Admin")]
         [Route("GetUserDetails")]
         public async Task<List<UserDetail>> GetUserDetails()
         {

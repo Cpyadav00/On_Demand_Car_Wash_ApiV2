@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using On_Demand_Car_Wash_ApiV2.Context;
+using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
 
@@ -23,7 +24,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                     return false;
                 }
                await _packageDb.Packages.AddAsync(package);
-                     _packageDb.SaveChangesAsync();
+                   await  _packageDb.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -93,11 +94,11 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         {
             try
             {
-           var package1= await _packageDb.Packages.FindAsync(package.Id);
-                if (package1 != null)
-                    return false;
-                _packageDb.Packages.Update(package);
-                _packageDb.SaveChangesAsync();
+           var package1= await _packageDb.Packages.AsNoTracking().FirstOrDefaultAsync(u=>u.Id==package.Id);
+                if (package1 == null)
+                   return false;
+                     _packageDb.Packages.Update(package);
+                await  _packageDb.SaveChangesAsync();
                 return true;    
             }
             catch (Exception ex)

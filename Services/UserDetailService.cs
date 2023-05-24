@@ -28,5 +28,10 @@ namespace On_Demand_Car_Wash_ApiV2.Services
             return await inter.GetUserDetails();
         }
 
+        public async Task<bool> DeleteUserDetails(int id)
+        {
+            return await inter.DeleteUserDetails(id);
+        }
+
     }
 }

@@ -65,6 +65,29 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
         #endregion Login User
 
+         #region Deleting User
+
+        public async Task<bool> DeleteUserDetails(int id)
+        {
+            try
+            {
+                var obj = await context.UserDetails.FirstOrDefaultAsync(x=>x.UserId==id);
+                if (obj == null)
+                    return false;
+                context.UserDetails.Remove(obj);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+           #endregion Deleting User
+
+
         #region For Register User
         public async Task<CustomReturnType> Register(UserDetail user)
         {

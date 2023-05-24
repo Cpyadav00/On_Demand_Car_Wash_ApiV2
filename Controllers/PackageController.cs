@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Models;
 using On_Demand_Car_Wash_ApiV2.Services;
 using System.Data;
@@ -40,8 +41,8 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             return Ok(await packageService.UpdatePackage(package));
         }
        // [Authorize(Roles = "Admin")]
-        [HttpDelete("DeletePackage")]
-        public async Task<ActionResult<bool>> DeletePackage(int id)
+        [HttpDelete("DeletePackage/{id}")]
+        public async Task<ActionResult<bool>> DeletePackage([FromRoute]int id)
         {
             return Ok(await packageService.DeletePackage(id));
         }

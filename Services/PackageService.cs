@@ -1,4 +1,5 @@
-﻿using On_Demand_Car_Wash_ApiV2.IRepository;
+﻿using On_Demand_Car_Wash_ApiV2.DTOs;
+using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
 
 namespace On_Demand_Car_Wash_ApiV2.Services
@@ -22,7 +23,7 @@ namespace On_Demand_Car_Wash_ApiV2.Services
         {
             return await _IPackage.AddPackage(package);
         }
-        public async Task<bool> UpdatePackage(Package package)
+        public async Task<bool> UpdatePackage( Package package)
         {
             return await _IPackage.UpdatePackage(package);
         }

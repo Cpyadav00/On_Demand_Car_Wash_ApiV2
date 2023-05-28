@@ -37,6 +37,9 @@ builder.Services.AddDbContext<CarDbContext>(option => {
 builder.Services.AddScoped<IUserDetail, UserDetailRepository>();
 builder.Services.AddScoped<UserDetailService, UserDetailService>();
 
+builder.Services.AddScoped<IOrderSendingData, OrderSendingDataRepository>();
+builder.Services.AddScoped<OrderSendingDataService, OrderSendingDataService>();
+
 builder.Services.AddScoped<ICar, CarRepository>();
 builder.Services.AddScoped<CarService, CarService>();
 

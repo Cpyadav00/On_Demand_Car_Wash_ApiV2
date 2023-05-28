@@ -14,32 +14,24 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         }
 
        
-
-        public async Task<List<Invoice>> ViewInvoiceAsync(int id)
+        public async Task<List<Invoice>> ViewAllInvoices()
         {
             try
             {
-                var query = (from a in _context.Orders
-                             join b in _context.UserDetails
-                             on a.CustId equals b.UserId
-                             join d in _context.Cars
-                                on a.CarId equals d.Id
-                             join e in _context.Packages
-                                on a.PackageId equals e.Id
+                return await _context.Invoices.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
-                             select new Invoice()
-                             {
-                                 CustomerName = b.FirstName+b.LastName,
-                                 DateTime = a.DateTime,
-                                 PaymentStatus = a.PaymentStatus,
-                                 OrderTotal = a.TotalCost,
-                                 CarName = d.Name,
-                                 PackageName = e.Name
-                             });
-                List<Invoice> list1 = query.ToList();
-               await _context.AddRangeAsync(list1);
-               await _context.SaveChangesAsync();
-                return list1;
+        public async Task<Invoice> ViewInvoiceById(int id)
+        {
+            try
+            {
+
+                return await _context.Invoices.SingleOrDefaultAsync(x => x.InvoiceId == id);
             }
             catch (Exception ex)
             {

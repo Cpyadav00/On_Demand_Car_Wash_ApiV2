@@ -44,7 +44,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                 if (order == null)
                     return false;
                 _orderDb.Orders.Remove(order);
-                _orderDb.SaveChangesAsync();
+                await _orderDb.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -59,6 +59,8 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         {
             try
             {
+              
+
                 var temp = await _orderDb.Orders.ToListAsync();
                 return temp;
             }

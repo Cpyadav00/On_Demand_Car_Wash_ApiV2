@@ -43,7 +43,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                 if(package == null)
                     return false;
                 _packageDb.Packages.Remove(package);
-                _packageDb.SaveChangesAsync();
+               await _packageDb.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)

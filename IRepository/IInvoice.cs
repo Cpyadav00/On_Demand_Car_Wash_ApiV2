@@ -4,6 +4,7 @@ namespace On_Demand_Car_Wash_ApiV2.IRepository
 {
     public interface IInvoice
     {
-        Task<List<Invoice>> ViewInvoiceAsync(int id);
+        Task<Invoice> ViewInvoiceById(int id);
+        Task<List<Invoice>> ViewAllInvoices();
     }
 }

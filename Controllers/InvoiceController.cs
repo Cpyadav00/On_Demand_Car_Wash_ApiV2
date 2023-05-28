@@ -16,9 +16,19 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Invoice>>> ViewInvoice(int id)
+        [Route("ViewInvoiceById/{id}")]
+        public async Task<ActionResult<Invoice>> ViewInvoiceById(int id)
         {
-            return await _Service.ViewInvoice(id);
+            return await _Service.ViewInvoiceById(id);
         }
+
+
+        [HttpGet]
+        [Route("ViewAllInvoices")]
+        public async Task<ActionResult<List<Invoice>>> ViewAllInvoices()
+        {
+            return await _Service.ViewAllInvoices();
+        }
+
     }
 }

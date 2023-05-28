@@ -10,10 +10,16 @@ namespace On_Demand_Car_Wash_ApiV2.Services
         {
             _repository = repository;
         }
-        public async Task<List<Invoice>> ViewInvoice(int id)
+        public async Task<Invoice> ViewInvoiceById(int id)
         {
-            return await _repository.ViewInvoiceAsync(id);
+            return await _repository.ViewInvoiceById(id);
         }
+        public async Task<List<Invoice>> ViewAllInvoices()
+        {
+            return await _repository.ViewAllInvoices();
+        }
+
+
 
     }
 }

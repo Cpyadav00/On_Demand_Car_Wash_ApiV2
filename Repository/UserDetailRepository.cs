@@ -110,7 +110,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                         return ans;
                     }
                     user.Password=PasswordHasher.HashPassword(user.Password);
-                    user.Role = "Customer";
+                   // user.Role = "Customer";
                     await context.UserDetails.AddAsync(user);
                     await context.SaveChangesAsync();
                     ans.ReturnCode = 200;

@@ -18,7 +18,7 @@ namespace On_Demand_Car_Wash_ApiV2.Services
         {
             return await _IOrder.GetOrder(id);
         }
-        public async Task<bool> AddOrder(Order order)
+        public async Task<Order> AddOrder(Order order)
         {
             return await _IOrder.AddOrder(order);
         }

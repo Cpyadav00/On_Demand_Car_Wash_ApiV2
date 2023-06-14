@@ -16,17 +16,19 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
 
         #region  Adding Order
-        public async Task<bool> AddOrder(Order order)
+        public async Task<Order> AddOrder(Order order)
         {
             try
             {
+                Order id = null;
                 if (order == null)
                 {
-                    return false;
+                    return id;
                 }
                 await _orderDb.Orders.AddAsync(order);
                 await _orderDb.SaveChangesAsync();
-                return true;
+               // id=order.Id;
+                return order;
             }
             catch (Exception ex)
             {

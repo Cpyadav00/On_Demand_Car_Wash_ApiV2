@@ -17,28 +17,28 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         }
        // [Authorize(Roles = "Washer")]
         [HttpGet("GetAllOrder")]
-        public async Task<ActionResult<List<Order>>> GetAllOrder()
+        public async Task<IActionResult> GetAllOrder()
         {
             var temp=await orderService.GetAllOrder();
             return Ok(temp);
         }
         [HttpGet("GetOrder")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<IActionResult> GetOrder(int id)
         {
             return Ok(await orderService.GetOrder(id));
         }
         [HttpPost("AddOrder")]
-        public async Task<ActionResult<bool>> AddOrder(Order order)
+        public async Task<IActionResult> AddOrder(Order order)
         {
             return Ok(await orderService.AddOrder(order));
         }
         [HttpPut("UpdateOrder")]
-        public async Task<ActionResult<bool>> UpdateOrder(Order admin)
+        public async Task<IActionResult> UpdateOrder(Order admin)
         {
             return Ok(await orderService.UpdateOrder(admin));
         }
         [HttpDelete("DeleteOrder")]
-        public async Task<ActionResult<bool>> DeleteOrder(int id)
+        public async Task<IActionResult> DeleteOrder(int id)
         {
             return Ok(await orderService.DeleteOrder(id));
         }

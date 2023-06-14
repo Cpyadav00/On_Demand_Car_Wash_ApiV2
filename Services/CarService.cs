@@ -18,7 +18,7 @@ namespace On_Demand_Car_Wash_ApiV2.Services
         {
             return await _ICar.GetCar(id);
         }
-        public async Task<bool> AddCar(Car car)
+        public async Task<int> AddCar(Car car)
         {
             return await _ICar.AddCar(car);
         }

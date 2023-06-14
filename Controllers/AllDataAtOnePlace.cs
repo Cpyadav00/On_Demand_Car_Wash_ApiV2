@@ -19,9 +19,9 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
 
         [HttpGet]
         [Route("AllData")]
-        public async Task<ActionResult<List<OrderSendingData>>> GetAllData()
+        public async Task<IActionResult> GetAllData()
         {
-            return await service.GetAllDetails();
+            return Ok(await service.GetAllDetails());
         }
     }
 }

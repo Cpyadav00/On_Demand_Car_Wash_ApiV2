@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using On_Demand_Car_Wash_ApiV2.Context;
 
@@ -11,9 +12,11 @@ using On_Demand_Car_Wash_ApiV2.Context;
 namespace On_Demand_Car_Wash_ApiV2.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    partial class CarDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230612173403_updated order model")]
+    partial class updatedordermodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +42,7 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                     b.Property<string>("CustAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CustId")
+                    b.Property<int>("CustId")
                         .HasColumnType("int");
 
                     b.Property<string>("Pincode")
@@ -49,6 +52,8 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustId");
 
                     b.ToTable("Addresses");
                 });
@@ -216,6 +221,17 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("UserDetails");
+                });
+
+            modelBuilder.Entity("On_Demand_Car_Wash_ApiV2.Models.Address", b =>
+                {
+                    b.HasOne("On_Demand_Car_Wash_ApiV2.Models.UserDetail", "UserDetail")
+                        .WithMany()
+                        .HasForeignKey("CustId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserDetail");
                 });
 
             modelBuilder.Entity("On_Demand_Car_Wash_ApiV2.Models.Order", b =>

@@ -14,28 +14,28 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             carService = _carService;
         }
         [HttpGet("GetAllCar")]
-        public async Task<ActionResult<List<Car>>> GetAllCar()
+        public async Task<IActionResult> GetAllCar()
         {
             var cars = await carService.GetAllCar();
             return Ok(cars);
         }
         [HttpGet("GetCar")]
-        public async Task<ActionResult<Car>> GetCar(int id)
+        public async Task<IActionResult> GetCar(int id)
         {
             return Ok(await carService.GetCar(id));
         }
         [HttpPost("AddCar")]
-        public async Task<ActionResult<bool>> AddCar(Car car)
+        public async Task<IActionResult> AddCar(Car car)
         {
             return Ok(await carService.AddCar(car));
         }
         [HttpPut("UpdateCar")]
-        public async Task<ActionResult<bool>> UpdateCar(Car car)
+        public async Task<IActionResult> UpdateCar(Car car)
         {
             return Ok(await carService.UpdateCar(car));
         }
         [HttpDelete("DeleteCar/{id}")]
-        public async Task<ActionResult<bool>> DeleteCar(int id)
+        public async Task<IActionResult> DeleteCar(int id)
         {
             return Ok(await carService.DeleteCar(id));
         }

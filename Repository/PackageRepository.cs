@@ -15,17 +15,19 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             _packageDb = context;
         }
         #region Adding Package
-        public async Task<bool> AddPackage(Package package)
+        public async Task<int> AddPackage(Package package)
         {
             try
             {
+                int id = 0;
               if(package == null)
                 {
-                    return false;
+                    return id;
                 }
                await _packageDb.Packages.AddAsync(package);
                    await  _packageDb.SaveChangesAsync();
-                return true;
+                id=package.Id;
+                return id;
             }
             catch (Exception ex)
             {

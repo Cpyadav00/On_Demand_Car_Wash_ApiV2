@@ -21,7 +21,8 @@ namespace On_Demand_Car_Wash_ApiV2.Helpers
                 var identity = new ClaimsIdentity(new Claim[]
                     {
                     new Claim( ClaimTypes.Role,user.Role),
-                    new Claim ( ClaimTypes.Name,$"{ user.FirstName} { user.LastName}")
+                    new Claim ( ClaimTypes.Name,$"{ user.FirstName} { user.LastName}"),
+                    new Claim( ClaimTypes.PrimarySid,user.UserId.ToString())
                     });
                 var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
 

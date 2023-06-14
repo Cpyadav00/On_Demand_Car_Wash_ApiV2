@@ -17,17 +17,17 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
 
         [HttpGet]
         [Route("ViewInvoiceById/{id}")]
-        public async Task<ActionResult<Invoice>> ViewInvoiceById(int id)
+        public async Task<ActionResult> ViewInvoiceById(int id)
         {
-            return await _Service.ViewInvoiceById(id);
+            return Ok(await _Service.ViewInvoiceById(id));
         }
 
 
         [HttpGet]
         [Route("ViewAllInvoices")]
-        public async Task<ActionResult<List<Invoice>>> ViewAllInvoices()
+        public async Task<IActionResult> ViewAllInvoices()
         {
-            return await _Service.ViewAllInvoices();
+            return Ok(await _Service.ViewAllInvoices());
         }
 
     }

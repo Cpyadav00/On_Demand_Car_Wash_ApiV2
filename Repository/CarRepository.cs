@@ -13,18 +13,20 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             _carDb = carDbContext;
         }
 
-        #region Get Car  
-        public async Task<bool> AddCar(Car car)
+        #region Adding Car  
+        public async Task<int> AddCar(Car car)
         {
             try
             {
+                int id = 0;
                 if (car == null)
                 {
-                    return false;
+                    return id;
                 }
                 await _carDb.Cars.AddAsync(car);
                 await _carDb.SaveChangesAsync();
-                return true;
+               id=car.Id;
+                return id;
             }
             catch (Exception ex)
             {

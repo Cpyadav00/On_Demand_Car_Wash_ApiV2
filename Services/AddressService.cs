@@ -19,7 +19,7 @@ namespace On_Demand_Car_Wash_ApiV2.Services
         {
             return await _IAddress.GetAddress(id);
         }
-        public async Task<bool> AddAddress(Address address)
+        public async Task<int> AddAddress(Address address)
         {
             return await _IAddress.AddAddress(address);
         }

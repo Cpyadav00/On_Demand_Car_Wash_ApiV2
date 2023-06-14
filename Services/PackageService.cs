@@ -19,7 +19,7 @@ namespace On_Demand_Car_Wash_ApiV2.Services
         {
             return await _IPackage.GetPackage(id);
         }
-        public async Task<bool> AddPackage(Package package)
+        public async Task<int> AddPackage(Package package)
         {
             return await _IPackage.AddPackage(package);
         }

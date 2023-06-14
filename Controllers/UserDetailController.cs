@@ -89,13 +89,13 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         [HttpDelete]
        // [Authorize(Roles = "Admin")]
         [Route("DeleteUserDetails/{id}")]
-        public async Task<bool> DeleteUserDetails([FromRoute]int id)
+        public async Task<IActionResult> DeleteUserDetails([FromRoute]int id)
         {
             if (id == 0)
-                return false;
+                return Ok(false);
             if(await service.DeleteUserDetails(id))
-                return true;
-            return false;
+                return Ok(true);
+            return Ok(false);
         }
 
         #endregion For Deleting User
@@ -105,10 +105,10 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         [HttpGet]
        // [Authorize(Roles ="Admin")]
         [Route("GetUserDetails")]
-        public async Task<List<UserDetail>> GetUserDetails()
+        public async Task<IActionResult> GetUserDetails()
         {
             var result = await service.GetUserDetails();
-            return result;
+            return Ok(result);
         }
 
         #endregion For Getting All Users

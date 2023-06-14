@@ -14,17 +14,19 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         }
 
         #region Get Address
-        public async Task<bool> AddAddress(Address add)
+        public async Task<int> AddAddress(Address add)
         {
             try
             {
+                int id = 0;
                 if (add == null)
                 {
-                    return false;
+                    return id;
                 }
                 await _addressDb.Addresses.AddAsync(add);
                await _addressDb.SaveChangesAsync();
-                return true;
+                id=add.Id;
+                return id;
             }
             catch (Exception ex)
             {

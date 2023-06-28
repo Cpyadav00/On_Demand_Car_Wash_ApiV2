@@ -74,6 +74,121 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
         #endregion GetAll Order
 
+
+        #region GetAll AllPreviousOrder
+        public async Task<List<Order>> AllPreviousOrder(int id)
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.WasherId == id && x.Status=="Delivered").ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll AllPreviousOrder
+
+
+        #region GetAll AllDeliveredOrderForAdmin
+        public async Task<List<Order>> AllDeliveredOrderForAdmin()
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.PaymentStatus=="Paid" && x.Status == "Delivered").ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll AllDeliveredOrderForAdmin
+
+        #region GetAll AllPreviousOrderForCustomer
+        public async Task<List<Order>> AllPreviousOrderForCustomer(int id)
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.CustId == id && x.Status == "Delivered").ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll AllPreviousOrderForCustomer
+
+        #region GetAll ScheduledWash
+        public async Task<List<Order>> ScheduledWash(int id)
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.WasherId == id && x.Status == "Not Delievered").ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll ScheduledWash
+
+
+
+        #region GetAll ScheduledWashForCustomer
+        public async Task<List<Order>> ScheduledWashForCustomer(int id)
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.CustId == id && x.Status == "Not Delievered").ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll ScheduledWashForCustomer
+
+
+        #region GetAll Request
+        public async Task<List<Order>> GetAllRequest()
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.WasherId == 0).ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll Request
+
+
+
         #region Get Order
         public async Task<Order> GetOrder(int id)
         {

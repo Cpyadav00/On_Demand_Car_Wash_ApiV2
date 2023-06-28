@@ -19,7 +19,7 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             var cars = await carService.GetAllCar();
             return Ok(cars);
         }
-        [HttpGet("GetCar")]
+        [HttpGet("GetCar/{id}")]
         public async Task<IActionResult> GetCar(int id)
         {
             return Ok(await carService.GetCar(id));

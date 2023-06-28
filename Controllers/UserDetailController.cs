@@ -112,6 +112,34 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
         }
 
         #endregion For Getting All Users
+        
+
+        #region For Getting All Washer
+
+        [HttpGet]
+        // [Authorize(Roles ="Admin")]
+        [Route("GetWasherDetails")]
+        public async Task<IActionResult> GetWasherDetails()
+        {
+            var result = await service.GetWasherDetails();
+            return Ok(result);
+        }
+
+        #endregion For Getting All Washer
+
+
+        #region For Getting Users
+
+        [HttpGet]
+        // [Authorize(Roles ="Admin")]
+        [Route("GetUserById/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var result = await service.GetUserById(id);
+            return Ok(result);
+        }
+
+        #endregion For Getting Users
 
 
     }

@@ -43,17 +43,21 @@ builder.Services.AddScoped<OrderSendingDataService, OrderSendingDataService>();
 builder.Services.AddScoped<ICar, CarRepository>();
 builder.Services.AddScoped<CarService, CarService>();
 
+builder.Services.AddScoped<IRating, RatingRepository>();
+builder.Services.AddScoped<RatingService, RatingService>();
+
 builder.Services.AddScoped<IPackage, PackageRepository>();
 builder.Services.AddScoped<PackageService, PackageService>();
 
-builder.Services.AddScoped<IInvoice, InvoiceRepository>();
-builder.Services.AddScoped<InvoiceService, InvoiceService>();
 
 builder.Services.AddScoped<IAddress, AddressRepository>();
 builder.Services.AddScoped<AddressService, AddressService>();
 
 builder.Services.AddScoped<IOrder, OrderRepository>();
 builder.Services.AddScoped<OrderService, OrderService>();
+
+builder.Services.AddScoped<IPayment, PaymentRepository>();
+builder.Services.AddScoped<PaymentService, PaymentService>();
 
 
 builder.Services.AddAuthentication(x =>

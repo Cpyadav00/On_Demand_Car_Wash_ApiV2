@@ -96,7 +96,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             try
             {
                 var car = await _carDb.Cars.AsNoTracking().FirstOrDefaultAsync(u => u.Id == add.Id);
-                if (car != null)
+                if (car == null)
                     return false;
                 _carDb.Cars.Update(add);
                 await _carDb.SaveChangesAsync();

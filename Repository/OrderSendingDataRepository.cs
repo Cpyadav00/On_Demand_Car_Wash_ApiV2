@@ -20,14 +20,13 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         {
             var query = (from a in _dbContext.Orders
                          join b in _dbContext.UserDetails
-                             on a.CustId equals b.UserId
+                             on a.CustId equals b.UserId 
                          join d in _dbContext.Cars
                             on a.CarId equals d.Id
                          join e in _dbContext.Packages
                             on a.PackageId equals e.Id
                          join f in _dbContext.Addresses
                          on a.AddressId equals f.Id
-                         where b.Role=="Washer"
 
                          select new OrderSendingData()
                          {

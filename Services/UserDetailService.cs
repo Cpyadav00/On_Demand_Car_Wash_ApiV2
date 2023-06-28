@@ -1,4 +1,5 @@
 ﻿
+using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
 using On_Demand_Car_Wash_ApiV2.Repository;
@@ -28,9 +29,21 @@ namespace On_Demand_Car_Wash_ApiV2.Services
             return await inter.GetUserDetails();
         }
 
+        
+
+             public async Task<List<UserDetail>> GetWasherDetails()
+        {
+            return await inter.GetWasherDetails();
+        }
+
         public async Task<bool> DeleteUserDetails(int id)
         {
             return await inter.DeleteUserDetails(id);
+        }
+
+        public async Task<UserDetail> GetUserById(int id)
+        {
+            return await inter.GetUserById(id);
         }
 
     }

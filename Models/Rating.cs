@@ -3,15 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace On_Demand_Car_Wash_ApiV2.Models
 {
-    public class Car
+    public class Rating
     {
         [Key]
-        [DataType("int")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Model { get; set; }
-        public string? CarNumber { get; set; }
-        public string Status { get; set; }
+        public int WasherId {get;set;}
+        public int RatingsOfWasher { get; set; }
+        public int OrderId { get; set; } 
+
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using On_Demand_Car_Wash_ApiV2.Context;
+using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
@@ -170,6 +171,44 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
 
         #endregion For Getting All Users
+        
+
+        #region For Getting All Washer
+        public async Task<List<UserDetail>> GetWasherDetails()
+        {
+            return await context.UserDetails.Where(u=>u.Role=="Washer").ToListAsync();
+
+           
+
+        }
+
+
+        #endregion For Getting All Washer
+
+
+
+        #region For Getting Users By Id
+        public async Task<UserDetail> GetUserById(int id)
+        {
+            UserDetail user;
+            try
+            {
+                user = await context.UserDetails.FindAsync(id);
+                if (user != null)
+                {
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return user;
+        }
+
+
+        #endregion For Getting Users By Id
+
 
     }
 }

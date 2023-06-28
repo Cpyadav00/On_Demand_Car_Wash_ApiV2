@@ -19,7 +19,7 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             var temp = await addressService.GetAllAddress();
             return   Ok(temp);
         }
-        [HttpGet("GetAddress")]
+        [HttpGet("GetAddress/{id}")]
         public async Task<IActionResult> GetAddress(int id)
         {
             return Ok(await addressService.GetAddress(id));

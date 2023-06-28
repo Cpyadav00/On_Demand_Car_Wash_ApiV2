@@ -23,7 +23,7 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             var temp = await packageService.GetAllPackage();
             return  Ok(temp);
         }
-        [HttpGet("GetPackage")]
+        [HttpGet("GetPackage/{id}")]
         public async Task<IActionResult> GetPackage(int id)
         {
             return Ok(await packageService.GetPackage(id));

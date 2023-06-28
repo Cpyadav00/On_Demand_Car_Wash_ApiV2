@@ -5,24 +5,27 @@
 namespace On_Demand_Car_Wash_ApiV2.Migrations
 {
     /// <inheritdoc />
-    public partial class addedcarmodel : Migration
+    public partial class AddedRatingTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "Rating",
+                table: "UserDetails");
+
             migrationBuilder.CreateTable(
-                name: "Cars",
+                name: "Ratings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    WasherId = table.Column<int>(type: "int", nullable: false),
+                    Ratings = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
                 });
         }
 
@@ -30,7 +33,13 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cars");
+                name: "Ratings");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Rating",
+                table: "UserDetails",
+                type: "int",
+                nullable: true);
         }
     }
 }

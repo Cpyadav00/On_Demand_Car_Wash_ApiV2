@@ -5,24 +5,25 @@
 namespace On_Demand_Car_Wash_ApiV2.Migrations
 {
     /// <inheritdoc />
-    public partial class addeddateTime : Migration
+    public partial class changesinrating2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "DateTime",
-                table: "Orders",
-                newName: "Date_Time");
+            migrationBuilder.AddColumn<int>(
+                name: "OrderId",
+                table: "Ratings",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Date_Time",
-                table: "Orders",
-                newName: "DateTime");
+            migrationBuilder.DropColumn(
+                name: "OrderId",
+                table: "Ratings");
         }
     }
 }

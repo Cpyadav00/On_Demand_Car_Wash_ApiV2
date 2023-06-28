@@ -12,8 +12,8 @@ using On_Demand_Car_Wash_ApiV2.Context;
 namespace On_Demand_Car_Wash_ApiV2.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    [Migration("20230612174654_updated foreginkey")]
-    partial class updatedforeginkey
+    [Migration("20230622065716_New Updated")]
+    partial class NewUpdated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                     b.Property<string>("CustAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustId")
+                    b.Property<int?>("CustId")
                         .HasColumnType("int");
 
                     b.Property<string>("Pincode")
@@ -64,6 +64,9 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CarNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
@@ -78,40 +81,6 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("On_Demand_Car_Wash_ApiV2.Models.Invoice", b =>
-                {
-                    b.Property<int>("InvoiceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
-
-                    b.Property<string>("CarName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("OrderTotal")
-                        .HasColumnType("real");
-
-                    b.Property<string>("PackageName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WasherName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("InvoiceId");
-
-                    b.ToTable("Invoices");
-                });
-
             modelBuilder.Entity("On_Demand_Car_Wash_ApiV2.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -120,14 +89,17 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarId")
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CustId")
+                    b.Property<int>("CustId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date_Time")
                         .HasColumnType("datetime2");
@@ -138,17 +110,26 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                     b.Property<DateTime>("IsScheduledLater")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PackageId")
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
                     b.Property<string>("PaymentStatus")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PhoneNumber")
+                        .HasColumnType("float");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("TotalCost")
                         .HasColumnType("real");
+
+                    b.Property<int>("WasherId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -182,6 +163,37 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Packages");
+                });
+
+            modelBuilder.Entity("On_Demand_Car_Wash_ApiV2.Models.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CardHolderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("CardNumber")
+                        .HasColumnType("float");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cvv")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Expiry")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("On_Demand_Car_Wash_ApiV2.Models.UserDetail", b =>
@@ -225,11 +237,15 @@ namespace On_Demand_Car_Wash_ApiV2.Migrations
                 {
                     b.HasOne("On_Demand_Car_Wash_ApiV2.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("On_Demand_Car_Wash_ApiV2.Models.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
 

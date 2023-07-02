@@ -10,6 +10,8 @@ namespace On_Demand_Car_Wash_ApiV2.IRepository
         Task<CustomReturnType> Register(UserDetail user);
         Task<List<UserDetail>> GetUserDetails();
         Task<List<UserDetail>> GetWasherDetails();
+        Task<List<UserDetail>> GetCustomers();
+        Task<List<UserDetail>> GetAdmins();
 
         Task<bool> DeleteUserDetails(int id);
 

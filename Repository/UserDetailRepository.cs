@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using On_Demand_Car_Wash_ApiV2.Context;
-using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
-using System.ComponentModel;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -40,6 +34,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                 var check=await context.UserDetails.FirstOrDefaultAsync(
                     x=>x.Email == user.Email);
                 if (check != null) {
+
                     if (PasswordHasher.VerifyPassword(user.Password, check.Password))
                     {
                         check.Token = token.CreateJwt(check);
@@ -181,9 +176,28 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
            
 
         }
-
-
         #endregion For Getting All Washer
+
+        #region For Getting All Customers
+        public async Task<List<UserDetail>> GetCustomers()
+        {
+            return await context.UserDetails.Where(u => u.Role == "Customer").ToListAsync();
+
+
+
+        }
+        #endregion For Getting All Customers
+
+
+        #region For Getting All Admins
+        public async Task<List<UserDetail>> GetAdmins()
+        {
+            return await context.UserDetails.Where(u => u.Role == "Admin").ToListAsync();
+
+
+
+        }
+        #endregion For Getting All Admins
 
 
 

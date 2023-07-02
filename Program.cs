@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using On_Demand_Car_Wash_ApiV2.Context;
 using On_Demand_Car_Wash_ApiV2.IRepository;
@@ -32,16 +33,25 @@ builder.Services.AddDbContext<CarDbContext>(option => {
     option.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));
 });
 
+//builder.Services.Configureservices.Configure<AuthMessageSenderOptions>(Configuration);
 
+builder.Services.AddTransient<IUserDetail, UserDetailRepository>();
+builder.Services.AddTransient<UserDetailService, UserDetailService>();
 
-builder.Services.AddScoped<IUserDetail, UserDetailRepository>();
-builder.Services.AddScoped<UserDetailService, UserDetailService>();
+builder.Services.AddTransient<ISubscriber, SubscriberRepository>();
+builder.Services.AddTransient<SubscriberService, SubscriberService>();
+
+builder.Services.AddTransient<IContactUs, ContactUsRepository>();
+builder.Services.AddTransient<ContactUsService, ContactUsService>();
 
 builder.Services.AddScoped<IOrderSendingData, OrderSendingDataRepository>();
 builder.Services.AddScoped<OrderSendingDataService, OrderSendingDataService>();
 
 builder.Services.AddScoped<ICar, CarRepository>();
 builder.Services.AddScoped<CarService, CarService>();
+
+builder.Services.AddTransient<IEmail, EmailRepository>();
+builder.Services.AddTransient<EmailService, EmailService>();
 
 builder.Services.AddScoped<IRating, RatingRepository>();
 builder.Services.AddScoped<RatingService, RatingService>();

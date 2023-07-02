@@ -31,9 +31,19 @@ namespace On_Demand_Car_Wash_ApiV2.Services
 
         
 
-             public async Task<List<UserDetail>> GetWasherDetails()
+        public async Task<List<UserDetail>> GetWasherDetails()
         {
             return await inter.GetWasherDetails();
+        }
+
+        public async Task<List<UserDetail>> GetAdmins()
+        {
+            return await inter.GetAdmins();
+        }
+
+        public async Task<List<UserDetail>> GetCustomers()
+        {
+            return await inter.GetCustomers();
         }
 
         public async Task<bool> DeleteUserDetails(int id)

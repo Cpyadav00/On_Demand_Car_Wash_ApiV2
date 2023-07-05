@@ -1,4 +1,5 @@
-﻿using On_Demand_Car_Wash_ApiV2.IRepository;
+﻿using On_Demand_Car_Wash_ApiV2.DTOs;
+using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
 
 namespace On_Demand_Car_Wash_ApiV2.Services
@@ -15,6 +16,11 @@ namespace On_Demand_Car_Wash_ApiV2.Services
             return await _IOrder.GetAllOrder();
         }
         
+        public async Task<RevenueDTO> Revenue()
+        {
+            return await _IOrder.Revenue();
+        }
+
         public async Task<List<Order>> AllPreviousOrder(int id)
         {
             return await _IOrder.AllPreviousOrder(id);
@@ -60,6 +66,14 @@ namespace On_Demand_Car_Wash_ApiV2.Services
         public async Task<bool> DeleteOrder(int id)
         {
             return await _IOrder.DeleteOrder(id);
+        }
+        public async Task<List<Order>> GetAllOrdersByIdForWasher(int id)
+        {
+            return await _IOrder.GetAllOrdersByIdForWasher(id);
+        }
+        public async Task<List<Order>> GetAllOrdersByIdForCustomer(int id)
+        {
+            return await _IOrder.GetAllOrdersByIdForCustomer(id);
         }
     }
 }

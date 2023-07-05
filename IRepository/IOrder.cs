@@ -1,4 +1,5 @@
-﻿using On_Demand_Car_Wash_ApiV2.Models;
+﻿using On_Demand_Car_Wash_ApiV2.DTOs;
+using On_Demand_Car_Wash_ApiV2.Models;
 
 namespace On_Demand_Car_Wash_ApiV2.IRepository
 {
@@ -14,7 +15,7 @@ namespace On_Demand_Car_Wash_ApiV2.IRepository
         
             Task<List<Order>> AllDeliveredOrderForAdmin();
 
-
+        Task<RevenueDTO> Revenue();
 
         Task<List<Order>> GetAllRequest();
         Task<List<Order>> ScheduledWash(int id);
@@ -23,5 +24,9 @@ namespace On_Demand_Car_Wash_ApiV2.IRepository
          Task<Order> AddOrder(Order order);
          Task<bool> UpdateOrder(Order order);
          Task<bool> DeleteOrder(int id);
+        Task<List<Order>> GetAllOrdersByIdForWasher(int id);
+
+        Task<List<Order>> GetAllOrdersByIdForCustomer(int id);
+
     }
 }

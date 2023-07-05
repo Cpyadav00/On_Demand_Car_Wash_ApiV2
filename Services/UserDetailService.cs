@@ -51,9 +51,14 @@ namespace On_Demand_Car_Wash_ApiV2.Services
             return await inter.DeleteUserDetails(id);
         }
 
-        public async Task<UserDetail> GetUserById(int id)
+        public async Task<UserDetailDTO> GetUserById(int id)
         {
             return await inter.GetUserById(id);
+        }
+
+        public async Task<int> UpdateUser(UserDetailDTO obj)
+        {
+            return await inter.UpdateUser(obj);
         }
 
     }

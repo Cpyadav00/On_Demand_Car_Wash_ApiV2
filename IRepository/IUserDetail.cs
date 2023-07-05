@@ -15,7 +15,9 @@ namespace On_Demand_Car_Wash_ApiV2.IRepository
 
         Task<bool> DeleteUserDetails(int id);
 
-        Task<UserDetail> GetUserById(int id);
+        Task<UserDetailDTO> GetUserById(int id);
+        
+            Task<int> UpdateUser(UserDetailDTO obj);
 
     }
 }

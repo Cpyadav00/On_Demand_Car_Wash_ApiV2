@@ -5,17 +5,19 @@ namespace On_Demand_Car_Wash_ApiV2.DTOs
 {
     public class UserDetailDTO
     {
-        public int WasherId { get; set; }
-        public string WasherName { get; set; }
-
-     //   [DataType(DataType.PhoneNumber)]
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public long PhoneNumber { get; set; }
-
-     //   [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public string Status { get; set; }
-        public int RatingsOfWasher { get; set; }
-       // public int OrderId { get; set; }
+        public string Role { get; set; }
+
+        public string Gender { get; set; }
+
+        public string PermanentAddress { get; set; }
+
+        public int Age { get; set; }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using On_Demand_Car_Wash_ApiV2.Context;
+using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
@@ -202,26 +203,72 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
 
         #region For Getting Users By Id
-        public async Task<UserDetail> GetUserById(int id)
+        public async Task<UserDetailDTO> GetUserById(int id)
         {
             UserDetail user;
+            UserDetailDTO userDetailDTO=new UserDetailDTO();
             try
             {
                 user = await context.UserDetails.FindAsync(id);
                 if (user != null)
                 {
-                    return user;
+                    userDetailDTO.FirstName = user.FirstName;
+                    userDetailDTO.LastName = user.LastName; 
+                    userDetailDTO.Email = user.Email;
+                    userDetailDTO.Gender = user.Gender;
+                    userDetailDTO.Role = user.Role;
+                    userDetailDTO.PhoneNumber = user.PhoneNumber;
+                    userDetailDTO.PermanentAddress= user.PermanentAddress;
+                    userDetailDTO.Age = user.Age;
+                    userDetailDTO.Id = user.UserId;
+                    return userDetailDTO;
                 }
             }
             catch (Exception ex)
             {
                 throw;
             }
-            return user;
+            return userDetailDTO;
         }
 
 
         #endregion For Getting Users By Id
+
+
+
+
+
+        #region For Update User
+        public async Task<int> UpdateUser(UserDetailDTO userDetailDTO)
+        {
+            UserDetail user= await context.UserDetails.FindAsync(userDetailDTO.Id);
+            //UserDetailDTO userDetailDTO = new UserDetailDTO();
+            try
+            {
+                if (user != null)
+                {
+                   user.FirstName = userDetailDTO.FirstName;
+                    user.LastName = userDetailDTO.LastName;
+                    user.Email = userDetailDTO.Email;
+                    user.Gender = userDetailDTO.Gender;
+                    user.PhoneNumber = userDetailDTO.PhoneNumber;
+                    user.Age = userDetailDTO.Age;
+                    user.PermanentAddress = userDetailDTO.PermanentAddress;
+                    context.UserDetails.Update(user);
+                    await context.SaveChangesAsync();
+                    return user.UserId;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return user.UserId;
+        }
+
+
+        #endregion For Update User
+
 
 
     }

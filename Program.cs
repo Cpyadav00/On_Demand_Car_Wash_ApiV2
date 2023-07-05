@@ -44,8 +44,6 @@ builder.Services.AddTransient<SubscriberService, SubscriberService>();
 builder.Services.AddTransient<IContactUs, ContactUsRepository>();
 builder.Services.AddTransient<ContactUsService, ContactUsService>();
 
-builder.Services.AddScoped<IOrderSendingData, OrderSendingDataRepository>();
-builder.Services.AddScoped<OrderSendingDataService, OrderSendingDataService>();
 
 builder.Services.AddScoped<ICar, CarRepository>();
 builder.Services.AddScoped<CarService, CarService>();

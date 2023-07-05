@@ -99,7 +99,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                       $"Service Name: {packageObj.Name}\r\n" +
                       $"Service Description: {packageObj.Description}\r\n" +
                       $"Subtotal: {packageObj.Price}\r\n" +
-                      $"Tax (10%): {packageObj.Price * 0.10}\r\n" +
+                      $"Tax (10%): {(packageObj.Price * 0.10).ToString("0.00")}\r\n" +
                       $"Total: {orderObj.TotalCost}\r\n\r\n", boldFont));
                 document.Add(new Paragraph("Payment Information:\r\n" +
                       "Payment Method: Gpay\r\n" +
@@ -130,7 +130,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
                       $"Service Name: {packageObj.Name}\r\n" +
                       $"Service Description: {packageObj.Description}\r\n" +
                       $"Subtotal: {packageObj.Price}\r\n" +
-                      $"Tax (10%): {packageObj.Price * 0.10}\r\n" +
+                      $"Tax (10%): {(packageObj.Price * 0.10).ToString("0.00")}\r\n" +
                       $"Total: {orderObj.TotalCost}\r\n\r\n", boldFont));
                 document.Add(new Paragraph("Payment Information:\r\n" +
                       "Payment Method: Cash After Wash\r\n\r\n", boldFont));

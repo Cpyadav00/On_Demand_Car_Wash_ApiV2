@@ -22,13 +22,32 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
             var temp=await orderService.GetAllOrder();
             return Ok(temp);
         }
+        
+        [HttpGet("Revenue")]
+        public async Task<IActionResult> Revenue()
+        {
+            var temp = await orderService.Revenue();
+            return Ok(temp);
+        }
+
         [HttpGet("AllPreviousOrder/{id}")]
         public async Task<IActionResult> AllPreviousOrder(int id)
         {
             var temp = await orderService.AllPreviousOrder(id);
             return Ok(temp);
         }
-        
+        [HttpGet("GetAllOrdersByIdForCustomer/{id}")]
+        public async Task<IActionResult> GetAllOrdersByIdForCustomer(int id)
+        {
+            var temp = await orderService.GetAllOrdersByIdForCustomer(id);
+            return Ok(temp);
+        }
+        [HttpGet("GetAllOrdersByIdForWasher/{id}")]
+        public async Task<IActionResult> GetAllOrdersByIdForWasher(int id)
+        {
+            var temp = await orderService.GetAllOrdersByIdForWasher(id);
+            return Ok(temp);
+        }
 
         [HttpGet("AllDeliveredOrderForAdmin")]
         public async Task<IActionResult> AllDeliveredOrderForAdmin()

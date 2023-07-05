@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using On_Demand_Car_Wash_ApiV2.Context;
+using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.Helpers;
 using On_Demand_Car_Wash_ApiV2.Models;
 using On_Demand_Car_Wash_ApiV2.Services;
@@ -168,6 +169,20 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
 
         #endregion For Getting Users
 
+
+
+        #region For UpdateUser
+
+        [HttpPut]
+        // [Authorize(Roles ="Admin")]
+        [Route("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UserDetailDTO obj)
+        {
+            var result = await service.UpdateUser(obj);
+            return Ok(result);
+        }
+
+        #endregion For UpdateUser 
 
     }
 }

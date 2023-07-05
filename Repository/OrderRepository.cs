@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using On_Demand_Car_Wash_ApiV2.Context;
+using On_Demand_Car_Wash_ApiV2.DTOs;
 using On_Demand_Car_Wash_ApiV2.IRepository;
 using On_Demand_Car_Wash_ApiV2.Models;
 
@@ -149,6 +150,46 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         #endregion GetAll ScheduledWash
 
 
+        #region GetAll GetAllOrdersByIdForWasher
+        public async Task<List<Order>> GetAllOrdersByIdForWasher(int id)
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.WasherId == id).ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll GetAllOrdersByIdForWasher
+
+
+        #region GetAll GetAllOrdersByIdForCustomer
+        public async Task<List<Order>> GetAllOrdersByIdForCustomer(int id)
+        {
+            try
+            {
+
+
+                var temp = await _orderDb.Orders.Where(x => x.CustId == id).ToListAsync();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll GetAllOrdersByIdForCustomer
+
+
+
+
 
         #region GetAll ScheduledWashForCustomer
         public async Task<List<Order>> ScheduledWashForCustomer(int id)
@@ -229,6 +270,40 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
         #endregion Update Order
 
+
+
+        #region GetAll Revenue
+        public async Task<RevenueDTO> Revenue()
+        {
+            RevenueDTO ans=new RevenueDTO();
+            var net = 0.00;
+            var pack = 0.00;
+            var tax = 0.00;
+            try
+            {
+                var temp = await _orderDb.Orders.ToListAsync();
+                foreach (var item in temp)
+                {
+                    net += item.TotalCost;
+                    pack += (item.TotalCost*10)/11;
+                    tax += item.TotalCost*0.1;
+                }
+                ans.NetTotal = net;
+              
+                ans.PackagePrice= pack;
+               
+                ans.Tax = tax;
+                
+               
+                return ans;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        #endregion GetAll Revenue
 
 
     }

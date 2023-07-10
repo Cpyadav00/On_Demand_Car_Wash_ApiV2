@@ -14,7 +14,7 @@ namespace On_Demand_Car_Wash_ApiV2.Services
             inter = repository; 
         }
 
-        public async Task<CustomReturnType> Login(UserDetail user)
+        public async Task<CustomReturnType> Login(LoginDTO user)
         {
             return await inter.Login(user);
         }

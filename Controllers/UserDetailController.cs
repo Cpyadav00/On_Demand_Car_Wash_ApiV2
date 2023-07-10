@@ -24,7 +24,7 @@ namespace On_Demand_Car_Wash_ApiV2.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] UserDetail user)
+        public async Task<IActionResult> Login([FromBody] LoginDTO user)
         {
            var result= await service.Login(user);
             if(result.ReturnCode==200)

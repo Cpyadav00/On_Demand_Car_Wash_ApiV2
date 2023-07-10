@@ -138,7 +138,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             {
 
 
-                var temp = await _orderDb.Orders.Where(x => x.WasherId == id && x.Status == "Not Delievered").ToListAsync();
+                var temp = await _orderDb.Orders.Where(x => x.WasherId == id && x.Status == "Not Delivered").ToListAsync();
                 return temp;
             }
             catch (Exception ex)
@@ -198,7 +198,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             {
 
 
-                var temp = await _orderDb.Orders.Where(x => x.CustId == id && x.Status == "Not Delievered").ToListAsync();
+                var temp = await _orderDb.Orders.Where(x => x.CustId == id && x.Status == "Not Delivered").ToListAsync();
                 return temp;
             }
             catch (Exception ex)
@@ -217,7 +217,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             {
 
 
-                var temp = await _orderDb.Orders.Where(x => x.WasherId == 0).ToListAsync();
+                var temp = await _orderDb.Orders.Where(x => x.WasherId == 0 && x.Status== "Not Delivered").ToListAsync();
                 return temp;
             }
             catch (Exception ex)

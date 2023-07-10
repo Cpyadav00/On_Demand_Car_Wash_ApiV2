@@ -19,7 +19,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         }
 
         #region Login User
-        public async Task<CustomReturnType> Login(UserDetail user)
+        public async Task<CustomReturnType> Login(LoginDTO user)
         {
             try
             {

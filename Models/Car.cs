@@ -18,9 +18,9 @@ namespace On_Demand_Car_Wash_ApiV2.Models
     [StringLength(50, ErrorMessage = "Model must be between 1 and 50 characters.")]
     public string Model { get; set; }
 
-    [Required(ErrorMessage = "Car number is required.")]
-    [StringLength(10, ErrorMessage = "Car number must be between 1 and 10 characters.")]
-    public string CarNumber { get; set; }
+        [Required(ErrorMessage = "Car number is required.")]
+        [StringLength(11, ErrorMessage = "Car number must be between 1 and 11 characters.")]
+        public string CarNumber { get; set; }
 
     [Required(ErrorMessage = "Status is required.")]
     [StringLength(20, ErrorMessage = "Status must be between 1 and 20 characters.")]

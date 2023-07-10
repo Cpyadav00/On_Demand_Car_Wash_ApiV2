@@ -21,7 +21,7 @@ namespace On_Demand_Car_Wash_ApiV2.Models
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
         public float Price { get; set; }
         [Required(ErrorMessage = "Status is required.")]
-        public string Status { get; set; } = "Available";
+        public string Status { get; set; }
     }
 
 

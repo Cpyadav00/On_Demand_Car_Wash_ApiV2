@@ -17,15 +17,15 @@ namespace On_Demand_Car_Wash_ApiV2.Models
         [StringLength(50, ErrorMessage = "Customer name must be between 1 and 50 characters.")]
         public string CustomerName { get; set; }
 
-        public DateTime Date_Time { get; set; } = DateTime.Now;
+        public DateTime Date_Time { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "Total cost must be a positive value.")]
         public float TotalCost { get; set; }
         [Required(ErrorMessage = "Status is required.")]
         [StringLength(500, ErrorMessage = "Status must be between 1 and 500 characters.")]
-        public string Status { get; set; } = "Not Delivered";
+        public string Status { get; set; }
 
-        public DateTime IsScheduledLater { get; set; } = DateTime.Now;
+        public DateTime IsScheduledLater { get; set; }
         [Required(ErrorMessage = "Status is required.")]
         [StringLength(500, ErrorMessage = "Instructions must be between 1 and 500 characters.")]
         public string Instructions { get; set; }
@@ -33,7 +33,7 @@ namespace On_Demand_Car_Wash_ApiV2.Models
         [StringLength(500, ErrorMessage = "PaymentStatus must be between 1 and 500 characters.")]
         public string PaymentStatus { get; set; } = "Not Paid";
         [Required(ErrorMessage = "PaymentId is required.")]
-        public int PaymentId { get; set; } = 0;
+        public int PaymentId { get; set; }
 
         [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Phone number must be a 10-digit number.")]
         public double PhoneNumber { get; set; }
@@ -42,6 +42,10 @@ namespace On_Demand_Car_Wash_ApiV2.Models
         public int CustId { get; set; }
         [Required(ErrorMessage = "WasherId is required.")]
         public int WasherId { get; set; }
+
+        [Required(ErrorMessage = "IsDisApprove is required.")]
+        public bool IsDisApprove { get; set; } = false;
+
         [Required(ErrorMessage = "AddressId is required.")]
         public int AddressId { get; set; }
 

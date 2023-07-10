@@ -27,8 +27,8 @@ namespace On_Demand_Car_Wash_ApiV2.Models
         [StringLength(10, ErrorMessage = "Pincode must be between 1 and 10 characters.")]
         public string Pincode { get; set; }
 
-        [Required(ErrorMessage = "Country is required.")]
-        [StringLength(50, ErrorMessage = "Country must be between 1 and 50 characters.")]
+       [Required(ErrorMessage = "Country is required.")]
+       [StringLength(50, ErrorMessage = "Country must be between 1 and 50 characters.")]
         public string Country { get; set; }
 
     }

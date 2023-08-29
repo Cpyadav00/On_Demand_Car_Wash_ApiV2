@@ -85,7 +85,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
 
                 // Create the content for the PDF document
                 document.Add(new Paragraph($"Date: {DateTime.Now}\r\n" +
-                      $"Invoice Number: {EncryptString(Convert.ToString(orderObj.Id))}\r\n\r\n", boldFont));
+                      $"Invoice Number: {orderObj.Id}\r\n\r\n", boldFont));
                 document.Add(new Paragraph("Customer Information:\r\n" +
                       $"Name: {orderObj.CustomerName} \r\n" +
                       $"Address: {addressObj.CustAddress},{addressObj.City},{addressObj.State},{addressObj.Country},{addressObj.Pincode}\r\n" +
@@ -116,7 +116,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             else
             {
                 document.Add(new Paragraph($"Date: {DateTime.Now}\r\n" +
-                     $"Invoice Number: {EncryptString(Convert.ToString(orderObj.Id))}\r\n\r\n", boldFont));
+                     $"Invoice Number: {orderObj.Id}\r\n\r\n", boldFont));
                 document.Add(new Paragraph("Customer Information:\r\n" +
                       $"Name: {orderObj.CustomerName} \r\n" +
                       $"Address: {addressObj.CustAddress},{addressObj.City},{addressObj.State},{addressObj.Country},{addressObj.Pincode}\r\n" +
@@ -159,9 +159,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             string senderPassword = "yzceoztvkjwkwbdw";
 
             // Recipient's email address
-           // string recipientEmail = "hcpyadav2509@gmail.com";
 
-            // new NetworkCredential("sparklewashonline@gmail.com", "yzceoztvkjwkwbdw");
 
             // Create a new SMTP client
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
@@ -172,8 +170,8 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
             MailMessage mailMessage = new MailMessage(senderEmail,userObj.Email);
             mailMessage.Subject = "Invoice";
             mailMessage.Body = $"Dear {userObj.Email},\n\n" +
-                $"Please find attached the invoice #{EncryptString(Convert.ToString(orderObj.Id))} for the amount of {orderObj.TotalCost:C}.\n\n" +
-                "Thank you for your business.";
+                $"Please find attached the invoice #{orderObj.Id} for the amount of {orderObj.TotalCost:C}.\n\n" +
+                "Thank you";
 
             // Create an attachment from the PDF bytes
             MemoryStream attachmentStream = new MemoryStream(pdfBytes);

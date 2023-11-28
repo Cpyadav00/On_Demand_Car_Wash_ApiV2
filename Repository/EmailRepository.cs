@@ -22,6 +22,7 @@ namespace On_Demand_Car_Wash_ApiV2.Repository
         }
 
         #region Email Generation Method
+        // adding comment for the git testing purpose
         public async Task SendEmailAsync(string email, string subject, string body)
         {
 
